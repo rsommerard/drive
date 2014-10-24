@@ -12,7 +12,6 @@ empty_it()
 int main(int argc, char **argv)
 {
     unsigned int i;
-    unsigned char buffer[HDA_SECTORSIZE];
     
     /* init hardware */
     if(init_hardware("hardware.ini") == 0) {
@@ -28,32 +27,6 @@ int main(int argc, char **argv)
     _mask(1);
     
     format_sector(0, 0, HDA_MAXCYLINDER * HDA_MAXSECTOR, 0);
-    
-    read_sector(0, 0, buffer);
-    
-    printf("\n--------------------------------------------------------------------------------\n");
-    printf("Secteur 1:\n");
-    for(i = 0; i < HDA_SECTORSIZE; i++)
-    {
-        if(i%8 == 0) {
-            printf("\n");
-        }
-        printf("\t0x%x ",buffer[i]);
-    }
-    printf("\n");
-    
-    read_sector(0, 1, buffer);
-  
-    printf("\n--------------------------------------------------------------------------------\n");
-    printf("Secteur 2:\n");
-    for(i = 0; i < HDA_SECTORSIZE; i++)
-    {
-        if(i%8 == 0) {
-            printf("\n");
-        }
-        printf("\t0x%x ",buffer[i]);
-    }
-    printf("\n");
 
     /* and exit! */
     exit(EXIT_SUCCESS);
